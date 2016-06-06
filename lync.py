@@ -128,16 +128,28 @@ class Blinkstrip(blinkstick.BlinkStickPro):
 			for x in range(self.r_led_count):
 				self.set_color(0, x, r, g, b)
 				self.send_data(0)
-				time.sleep(300/1000.0 )
+				time.sleep(400/1000.0 )
 				self.set_color(0, x, 0, 0, 0)
 				self.send_data(0)
 
+		elif status == "Deploy":
+
+			for y in range(0, 9, 3):
+				self.off()
+				for x in range(y, (y+3)):
+					if (y == 3):
+						self.set_color(0, x, 255, 0, 0)
+					else:
+						self.set_color(0, x, 0, 0, 255)
+				self.send_data(0)
+				time.sleep(100/1000.0 )
+		elif status == "Off":
+			self.off()
 		else:
 			for x in range(self.r_led_count):
-				self.set_color(0, x, r, g, b)
+				self.set_color(0, x, r,g,b)
 			self.send_data(0)
-
-			time.sleep(500/1000.0)
+			time.sleep(700/1000.0)
 
 
 def cleanup(strip):
@@ -190,10 +202,24 @@ if __name__ == "__main__":
 			data = json.load(data_file)
 
 			argv = sys.argv[1:]
-			opts, args = getopt.getopt(argv,"hdv")
+			opts, args = getopt.getopt(argv,"hdvs")
 			for opt, arg in opts:
 				if opt == '-h':
 					print 'lync.py -d (run as deamon)'
+					sys.exit()
+				elif opt == '-s':
+					blinkstrip = Blinkstrip(r_led_count=9, max_rgb_value=240)
+					if blinkstrip.connect():
+						try:
+							print 'Press Ctrl-C to quit.'
+							while True:
+								blinkstrip.setStatus(args[0])
+
+						except KeyboardInterrupt:
+							# print "turn off"
+							blinkstrip.off()
+					else:
+						print "No BlinkSticks found"
 					sys.exit()
 				elif opt in ("-d"):
 					with daemon.DaemonContext():
