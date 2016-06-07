@@ -205,7 +205,7 @@ if __name__ == "__main__":
 			opts, args = getopt.getopt(argv,"hdvs")
 			for opt, arg in opts:
 				if opt == '-h':
-					print 'lync.py -d (run as deamon)'
+					print "usage:\t{0} [-hdvs]\n\t{0} -h\t\tThis help\n\t{0} -d\t\tRun as daemon\n\t{0} -v\t\tVerbose mode\n\t{0} -s Online\tSet status manually, ie. Online, Busy, DoNotDisturb, BeRightBack, Away and Deploy".format(sys.argv[0])
 					sys.exit()
 				elif opt == '-s':
 					blinkstrip = Blinkstrip(r_led_count=9, max_rgb_value=240)
