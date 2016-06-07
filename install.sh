@@ -12,3 +12,5 @@ sudo ln -s `brew --prefix`/lib/libusb-* /usr/local/lib/
 
 pip install blinkstick
 pip install python-daemon
+pip install requests
+pip install pyobjc-framework-Quartz
