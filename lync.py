@@ -191,7 +191,8 @@ def main(argv, config):
 					# print json.dumps(r6.json(),indent=4)
 					if verbose:
 						print "{0} status: {1}".format(config['username'], contact['availability'])
-					blinkstrip.setStatus(contact['availability'])
+					if 'availability' in contact:
+						blinkstrip.setStatus(contact['availability'])
 				else:
 					blinkstrip.setStatus('BeRightBack')
 
