@@ -5,11 +5,13 @@ Connect your Blinkstick pro to Lync
 In your commandline type: `./install.sh`
 
 ## Usage
-`./lync.py` Runs in commandline
+`python lync.py` Runs in commandline
 
-`./lync.py -v` Same as the above, with verbosemode
+`python lync.py -v` Same as the above, with verbosemode
 
-`./lync.py -d` Daemonmode, runs in background
+`python lync.py -s Online` Set status manually
+
+`python lync.py -d` Daemonmode, runs in background
 
 
 ## Note:
