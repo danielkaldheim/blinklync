@@ -4,6 +4,7 @@ import json
 import os.path
 import time
 import sys,getopt
+import psutil
 from signal import signal, SIGTERM
 import atexit
 # from AppKit import *
@@ -143,6 +144,16 @@ class Blinkstrip(blinkstick.BlinkStickPro):
 						self.set_color(0, x, 0, 0, 255)
 				self.send_data(0)
 				time.sleep(100/1000.0 )
+		elif status == "Cpu":
+			cpu = psutil.cpu_percent(interval=1)
+			intensity = int(255 * cpu / 100)
+			for x in range(self.r_led_count):
+				
+				self.set_color(0, x, intensity, 255 - intensity, 0)
+
+			self.send_data(0)
+			# time.sleep(100/1000.0)
+				
 		elif status == "Off":
 			self.off()
 		else:
