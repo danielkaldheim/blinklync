@@ -1,10 +1,15 @@
 #!/bin/bash
-
-if which easy_install >/dev/null; then
-	echo "Easy install exist, continue";
+if which brew >/dev/null; then
+	echo "Brew exist, continuing...";
 else
-	curl https://bootstrap.pypa.io/ez_setup.py -o - | sudo python
-	sudo easy_install pip
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+if which pip >/dev/null; then
+	echo "Pip exist, continuing...";
+else
+	brew install python
+	brew install pip
 fi
 
 brew install libusb
