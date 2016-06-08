@@ -17,3 +17,4 @@ pip install python-daemon
 pip install requests
 pip install pyobjc-framework-Quartz
 pip install pync
+pip install psutil
