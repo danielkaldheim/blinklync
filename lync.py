@@ -148,19 +148,17 @@ class Blinkstrip(blinkstick.BlinkStickPro):
 			cpu = psutil.cpu_percent(interval=1)
 			intensity = int(255 * cpu / 100)
 			for x in range(self.r_led_count):
-				
 				self.set_color(0, x, intensity, 255 - intensity, 0)
-
 			self.send_data(0)
 			# time.sleep(100/1000.0)
-				
+
 		elif status == "Off":
 			self.off()
 		else:
 			for x in range(self.r_led_count):
 				self.set_color(0, x, r,g,b)
 			self.send_data(0)
-			time.sleep(700/1000.0)
+			time.sleep(1000/1000.0)
 
 
 def cleanup(strip):
