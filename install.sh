@@ -10,7 +10,10 @@ fi
 brew install libusb
 sudo ln -s `brew --prefix`/lib/libusb-* /usr/local/lib/
 
+brew install terminal-notifier
+
 pip install blinkstick
 pip install python-daemon
 pip install requests
 pip install pyobjc-framework-Quartz
+pip install pync

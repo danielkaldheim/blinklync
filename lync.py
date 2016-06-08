@@ -10,7 +10,7 @@ import atexit
 # from PyObjCTools import AppHelper
 from urlparse import urlparse
 from blinkstick import blinkstick
-
+from pync import Notifier
 import Quartz
 
 def extractAuthURL(str):
@@ -170,6 +170,7 @@ def main(argv, config):
 
 		try:
 			print 'Press Ctrl-C to quit.'
+			prev = ""
 			while True:
 				d=Quartz.CGSessionCopyCurrentDictionary()
 				if d and d.get("CGSSessionScreenIsLocked", 0) == 0 and d.get("kCGSSessionOnConsoleKey", 0) == 1:
@@ -181,10 +182,12 @@ def main(argv, config):
 					if verbose:
 						print "{0} status: {1}".format(config['username'], contact['availability'])
 					if 'availability' in contact:
+						if prev != contact['availability']:
+							Notifier.notify(contact['availability'], title='Blinklync')
+							prev = contact['availability']
 						blinkstrip.setStatus(contact['availability'])
 				else:
 					blinkstrip.setStatus('BeRightBack')
-
 
 		except KeyboardInterrupt:
 			# print "turn off"
